@@ -1,0 +1,122 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: transfers/transfer-funds.spec.js >> Transfer Funds >> TC-XFER-UI-003: non-numeric amount shows validation error @regression @ui
+- Location: tests/ui/transfers/transfer-funds.spec.js:48:3
+
+# Error details
+
+```
+Error: expect(locator).toBeVisible() failed
+
+Locator: locator('#amount-error')
+Expected: visible
+Timeout: 5000ms
+Error: element(s) not found
+
+Call log:
+  - Expect "toBeVisible" with timeout 5000ms
+  - waiting for locator('#amount-error')
+
+```
+
+# Test source
+
+```ts
+  1  | import { test, expect } from '../../../fixtures/index.js';
+  2  | 
+  3  | /**
+  4  |  * Transfer Funds UI tests.
+  5  |  *
+  6  |  * All tests use the `transferPage` fixture which provides an authenticated page.
+  7  |  * Account IDs are retrieved at runtime via the `accountIds` data fixture to avoid
+  8  |  * hardcoding values that may become stale if the staging environment resets.
+  9  |  *
+  10 |  * Test data assumptions:
+  11 |  *   - john/demo has at least two accounts for transfers between them.
+  12 |  *   - The transfer form populates both dropdowns from the same account list.
+  13 |  */
+  14 | test.describe('Transfer Funds', () => {
+  15 |   test('TC-XFER-UI-001: successful transfer shows confirmation with amount and account refs @smoke @ui', async ({
+  16 |     transferPage,
+  17 |     accountIds,
+  18 |     testAmount,
+  19 |   }) => {
+  20 |     await transferPage.navigate();
+  21 | 
+  22 |     const fromId = accountIds[0];
+  23 |     const toId = accountIds[1] ?? accountIds[0];
+  24 | 
+  25 |     await transferPage.transfer(String(testAmount), fromId, toId);
+  26 | 
+  27 |     await expect(transferPage.confirmationHeading).toBeVisible();
+  28 | 
+  29 |     // The confirmation panel should mention the amount and the from/to account IDs
+  30 |     const confirmationText = await transferPage.getConfirmationText();
+  31 |     expect(confirmationText).toContain(String(testAmount));
+  32 |     expect(confirmationText).toContain(String(fromId));
+  33 |     expect(confirmationText).toContain(String(toId));
+  34 |   });
+  35 | 
+  36 |   test('TC-XFER-UI-002: empty amount field shows validation error @regression @ui', async ({
+  37 |     transferPage,
+  38 |     accountIds,
+  39 |   }) => {
+  40 |     await transferPage.navigate();
+  41 | 
+  42 |     // Submit without filling the amount — accounts are pre-selected by the form
+  43 |     await transferPage.submitWithoutAmount(accountIds[0], accountIds[0]);
+  44 | 
+  45 |     await expect(transferPage.amountError).toBeVisible();
+  46 |   });
+  47 | 
+  48 |   test('TC-XFER-UI-003: non-numeric amount shows validation error @regression @ui', async ({
+  49 |     transferPage,
+  50 |   }) => {
+  51 |     await transferPage.navigate();
+  52 | 
+  53 |     await transferPage.submitWithAmount('abc');
+  54 | 
+> 55 |     await expect(transferPage.amountError).toBeVisible();
+     |                                            ^ Error: expect(locator).toBeVisible() failed
+  56 |   });
+  57 | 
+  58 |   test('TC-XFER-UI-004: both account dropdowns are populated @smoke @ui', async ({
+  59 |     transferPage,
+  60 |     accountIds,
+  61 |   }) => {
+  62 |     await transferPage.navigate();
+  63 | 
+  64 |     const fromValues = await transferPage.fromAccount.getAllValues();
+  65 |     const toValues = await transferPage.toAccount.getAllValues();
+  66 | 
+  67 |     expect(fromValues.length).toBeGreaterThanOrEqual(1);
+  68 |     expect(toValues.length).toBeGreaterThanOrEqual(1);
+  69 | 
+  70 |     // The real account IDs from the API should appear in both dropdowns
+  71 |     for (const id of accountIds) {
+  72 |       expect(fromValues).toContain(String(id));
+  73 |       expect(toValues).toContain(String(id));
+  74 |     }
+  75 |   });
+  76 | 
+  77 |   test('TC-XFER-UI-005: zero amount is accepted and shows transfer confirmation @regression @ui', async ({
+  78 |     transferPage,
+  79 |     accountIds,
+  80 |   }) => {
+  81 |     await transferPage.navigate();
+  82 | 
+  83 |     // ParaBank does not validate $0 as invalid — it processes the transfer.
+  84 |     // This test documents that behaviour: a zero-amount transfer completes normally.
+  85 |     await transferPage.transfer('0', accountIds[0], accountIds[0]);
+  86 | 
+  87 |     await expect(transferPage.confirmationHeading).toBeVisible();
+  88 |   });
+  89 | });
+  90 | 
+```

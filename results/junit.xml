@@ -1,0 +1,787 @@
+<testsuites id="" name="" tests="23" failures="1" skipped="0" errors="20" time="6.570391000000001">
+<testsuite name="accounts/overview.spec.js" timestamp="2026-04-09T12:02:42.122Z" hostname="chromium" tests="4" failures="1" skipped="0" time="5.336" errors="3">
+<testcase name="Accounts Overview › TC-ACCT-UI-001: accounts overview heading is visible after login @smoke @ui" classname="accounts/overview.spec.js" time="0.002">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|../test-results/accounts-overview-Accounts-0f6ff-isible-after-login-smoke-ui-chromium/error-context.md]]
+
+[[ATTACHMENT|../test-results/accounts-overview-Accounts-0f6ff-isible-after-login-smoke-ui-chromium/trace.zip]]
+]]>
+</system-out>
+<error message="browser.newContext: storageState.cookies[0]: expected object, got null" type="Error">
+<![CDATA[  [chromium] › accounts/overview.spec.js:19:3 › Accounts Overview › TC-ACCT-UI-001: accounts overview heading is visible after login @smoke @ui 
+
+    Error: browser.newContext: storageState.cookies[0]: expected object, got null
+
+       at ../../fixtures/ui.fixtures.js:73
+
+      71 |       await apiRequest.dispose();
+      72 |
+    > 73 |       const context = await browser.newContext({
+         |                       ^
+      74 |         storageState: {
+      75 |           cookies: [cookie],
+      76 |           origins: [],
+        at Object.base.extend.authenticatedContext.scope (/Users/jsernav/Documents/repositories/claude-code-1/fixtures/ui.fixtures.js:73:23)
+
+    Error Context: ../../test-results/accounts-overview-Accounts-0f6ff-isible-after-login-smoke-ui-chromium/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../test-results/accounts-overview-Accounts-0f6ff-isible-after-login-smoke-ui-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../test-results/accounts-overview-Accounts-0f6ff-isible-after-login-smoke-ui-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+]]>
+</error>
+</testcase>
+<testcase name="Accounts Overview › TC-ACCT-UI-002: account number links navigate to account activity @smoke @ui" classname="accounts/overview.spec.js" time="0.001">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|../test-results/accounts-overview-Accounts-0f323-o-account-activity-smoke-ui-chromium/error-context.md]]
+
+[[ATTACHMENT|../test-results/accounts-overview-Accounts-0f323-o-account-activity-smoke-ui-chromium/trace.zip]]
+]]>
+</system-out>
+<error message="browser.newContext: storageState.cookies[0]: expected object, got null" type="Error">
+<![CDATA[  [chromium] › accounts/overview.spec.js:29:3 › Accounts Overview › TC-ACCT-UI-002: account number links navigate to account activity @smoke @ui 
+
+    Error: browser.newContext: storageState.cookies[0]: expected object, got null
+
+       at ../../fixtures/ui.fixtures.js:73
+
+      71 |       await apiRequest.dispose();
+      72 |
+    > 73 |       const context = await browser.newContext({
+         |                       ^
+      74 |         storageState: {
+      75 |           cookies: [cookie],
+      76 |           origins: [],
+        at Object.base.extend.authenticatedContext.scope (/Users/jsernav/Documents/repositories/claude-code-1/fixtures/ui.fixtures.js:73:23)
+
+    Error Context: ../../test-results/accounts-overview-Accounts-0f323-o-account-activity-smoke-ui-chromium/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../test-results/accounts-overview-Accounts-0f323-o-account-activity-smoke-ui-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../test-results/accounts-overview-Accounts-0f323-o-account-activity-smoke-ui-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+]]>
+</error>
+</testcase>
+<testcase name="Accounts Overview › TC-ACCT-UI-003: total balance equals sum of all account balances @regression @ui" classname="accounts/overview.spec.js" time="0.001">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|../test-results/accounts-overview-Accounts-d7916-ount-balances-regression-ui-chromium/error-context.md]]
+
+[[ATTACHMENT|../test-results/accounts-overview-Accounts-d7916-ount-balances-regression-ui-chromium/trace.zip]]
+]]>
+</system-out>
+<error message="browser.newContext: storageState.cookies[0]: expected object, got null" type="Error">
+<![CDATA[  [chromium] › accounts/overview.spec.js:47:3 › Accounts Overview › TC-ACCT-UI-003: total balance equals sum of all account balances @regression @ui 
+
+    Error: browser.newContext: storageState.cookies[0]: expected object, got null
+
+       at ../../fixtures/ui.fixtures.js:73
+
+      71 |       await apiRequest.dispose();
+      72 |
+    > 73 |       const context = await browser.newContext({
+         |                       ^
+      74 |         storageState: {
+      75 |           cookies: [cookie],
+      76 |           origins: [],
+        at Object.base.extend.authenticatedContext.scope (/Users/jsernav/Documents/repositories/claude-code-1/fixtures/ui.fixtures.js:73:23)
+
+    Error Context: ../../test-results/accounts-overview-Accounts-d7916-ount-balances-regression-ui-chromium/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../test-results/accounts-overview-Accounts-d7916-ount-balances-regression-ui-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../test-results/accounts-overview-Accounts-d7916-ount-balances-regression-ui-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+]]>
+</error>
+</testcase>
+<testcase name="Accounts Overview › TC-ACCT-UI-004: unauthenticated access to /overview.htm redirects to login @regression @ui" classname="accounts/overview.spec.js" time="5.332">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|../test-results/accounts-overview-Accounts-e4c05-ects-to-login-regression-ui-chromium/test-failed-1.png]]
+
+[[ATTACHMENT|../test-results/accounts-overview-Accounts-e4c05-ects-to-login-regression-ui-chromium/error-context.md]]
+
+[[ATTACHMENT|../test-results/accounts-overview-Accounts-e4c05-ects-to-login-regression-ui-chromium/trace.zip]]
+]]>
+</system-out>
+<failure message="expect(page).toHaveURL(expected) failed" type="expect.toHaveURL">
+<![CDATA[  [chromium] › accounts/overview.spec.js:66:3 › Accounts Overview › TC-ACCT-UI-004: unauthenticated access to /overview.htm redirects to login @regression @ui 
+
+    Error: expect(page).toHaveURL(expected) failed
+
+    Expected pattern: /\/parabank\/index.htm/
+    Received string:  "http://localhost:8080/parabank/overview.htm"
+    Timeout: 5000ms
+
+    Call log:
+      - Expect "toHaveURL" with timeout 5000ms
+        9 × unexpected value "http://localhost:8080/parabank/overview.htm"
+
+
+      75 |
+      76 |       // ParaBank redirects unauthenticated requests back to the login page.
+    > 77 |       await expect(page).toHaveURL(new RegExp(ROUTES.LOGIN));
+         |                          ^
+      78 |
+      79 |       await page.close();
+      80 |       await context.close();
+        at /Users/jsernav/Documents/repositories/claude-code-1/tests/ui/accounts/overview.spec.js:77:26
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../test-results/accounts-overview-Accounts-e4c05-ects-to-login-regression-ui-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../test-results/accounts-overview-Accounts-e4c05-ects-to-login-regression-ui-chromium/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../test-results/accounts-overview-Accounts-e4c05-ects-to-login-regression-ui-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../test-results/accounts-overview-Accounts-e4c05-ects-to-login-regression-ui-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+]]>
+</failure>
+</testcase>
+</testsuite>
+<testsuite name="auth/login.spec.js" timestamp="2026-04-09T12:02:42.122Z" hostname="chromium" tests="2" failures="0" skipped="0" time="1.122" errors="0">
+<testcase name="Login › valid credentials redirect to account overview @smoke @ui" classname="auth/login.spec.js" time="0.781">
+</testcase>
+<testcase name="Login › invalid credentials display an error message @regression @ui" classname="auth/login.spec.js" time="0.341">
+</testcase>
+</testsuite>
+<testsuite name="bill-pay/bill-pay.spec.js" timestamp="2026-04-09T12:02:42.122Z" hostname="chromium" tests="4" failures="0" skipped="0" time="0.003" errors="4">
+<testcase name="Bill Pay › TC-BILL-UI-001: successful bill payment with all fields shows confirmation @smoke @ui" classname="bill-pay/bill-pay.spec.js" time="0.001">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|../test-results/bill-pay-bill-pay-Bill-Pay-61f62-shows-confirmation-smoke-ui-chromium/error-context.md]]
+
+[[ATTACHMENT|../test-results/bill-pay-bill-pay-Bill-Pay-61f62-shows-confirmation-smoke-ui-chromium/trace.zip]]
+]]>
+</system-out>
+<error message="browser.newContext: storageState.cookies[0]: expected object, got null" type="Error">
+<![CDATA[  [chromium] › bill-pay/bill-pay.spec.js:32:3 › Bill Pay › TC-BILL-UI-001: successful bill payment with all fields shows confirmation @smoke @ui 
+
+    Error: browser.newContext: storageState.cookies[0]: expected object, got null
+
+       at ../../fixtures/ui.fixtures.js:73
+
+      71 |       await apiRequest.dispose();
+      72 |
+    > 73 |       const context = await browser.newContext({
+         |                       ^
+      74 |         storageState: {
+      75 |           cookies: [cookie],
+      76 |           origins: [],
+        at Object.base.extend.authenticatedContext.scope (/Users/jsernav/Documents/repositories/claude-code-1/fixtures/ui.fixtures.js:73:23)
+
+    Error Context: ../../test-results/bill-pay-bill-pay-Bill-Pay-61f62-shows-confirmation-smoke-ui-chromium/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../test-results/bill-pay-bill-pay-Bill-Pay-61f62-shows-confirmation-smoke-ui-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../test-results/bill-pay-bill-pay-Bill-Pay-61f62-shows-confirmation-smoke-ui-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+]]>
+</error>
+</testcase>
+<testcase name="Bill Pay › TC-BILL-UI-002: missing payee name shows validation error @regression @ui" classname="bill-pay/bill-pay.spec.js" time="0.001">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|../test-results/bill-pay-bill-pay-Bill-Pay-031be-idation-error-regression-ui-chromium/error-context.md]]
+
+[[ATTACHMENT|../test-results/bill-pay-bill-pay-Bill-Pay-031be-idation-error-regression-ui-chromium/trace.zip]]
+]]>
+</system-out>
+<error message="browser.newContext: storageState.cookies[0]: expected object, got null" type="Error">
+<![CDATA[  [chromium] › bill-pay/bill-pay.spec.js:50:3 › Bill Pay › TC-BILL-UI-002: missing payee name shows validation error @regression @ui 
+
+    Error: browser.newContext: storageState.cookies[0]: expected object, got null
+
+       at ../../fixtures/ui.fixtures.js:73
+
+      71 |       await apiRequest.dispose();
+      72 |
+    > 73 |       const context = await browser.newContext({
+         |                       ^
+      74 |         storageState: {
+      75 |           cookies: [cookie],
+      76 |           origins: [],
+        at Object.base.extend.authenticatedContext.scope (/Users/jsernav/Documents/repositories/claude-code-1/fixtures/ui.fixtures.js:73:23)
+
+    Error Context: ../../test-results/bill-pay-bill-pay-Bill-Pay-031be-idation-error-regression-ui-chromium/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../test-results/bill-pay-bill-pay-Bill-Pay-031be-idation-error-regression-ui-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../test-results/bill-pay-bill-pay-Bill-Pay-031be-idation-error-regression-ui-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+]]>
+</error>
+</testcase>
+<testcase name="Bill Pay › TC-BILL-UI-003: mismatched account number fields show validation error @regression @ui" classname="bill-pay/bill-pay.spec.js" time="0">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|../test-results/bill-pay-bill-pay-Bill-Pay-f3834-idation-error-regression-ui-chromium/error-context.md]]
+
+[[ATTACHMENT|../test-results/bill-pay-bill-pay-Bill-Pay-f3834-idation-error-regression-ui-chromium/trace.zip]]
+]]>
+</system-out>
+<error message="browser.newContext: storageState.cookies[0]: expected object, got null" type="Error">
+<![CDATA[  [chromium] › bill-pay/bill-pay.spec.js:74:3 › Bill Pay › TC-BILL-UI-003: mismatched account number fields show validation error @regression @ui 
+
+    Error: browser.newContext: storageState.cookies[0]: expected object, got null
+
+       at ../../fixtures/ui.fixtures.js:73
+
+      71 |       await apiRequest.dispose();
+      72 |
+    > 73 |       const context = await browser.newContext({
+         |                       ^
+      74 |         storageState: {
+      75 |           cookies: [cookie],
+      76 |           origins: [],
+        at Object.base.extend.authenticatedContext.scope (/Users/jsernav/Documents/repositories/claude-code-1/fixtures/ui.fixtures.js:73:23)
+
+    Error Context: ../../test-results/bill-pay-bill-pay-Bill-Pay-f3834-idation-error-regression-ui-chromium/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../test-results/bill-pay-bill-pay-Bill-Pay-f3834-idation-error-regression-ui-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../test-results/bill-pay-bill-pay-Bill-Pay-f3834-idation-error-regression-ui-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+]]>
+</error>
+</testcase>
+<testcase name="Bill Pay › TC-BILL-UI-004: missing amount field shows validation error @regression @ui" classname="bill-pay/bill-pay.spec.js" time="0.001">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|../test-results/bill-pay-bill-pay-Bill-Pay-47cd7-idation-error-regression-ui-chromium/error-context.md]]
+
+[[ATTACHMENT|../test-results/bill-pay-bill-pay-Bill-Pay-47cd7-idation-error-regression-ui-chromium/trace.zip]]
+]]>
+</system-out>
+<error message="browser.newContext: storageState.cookies[0]: expected object, got null" type="Error">
+<![CDATA[  [chromium] › bill-pay/bill-pay.spec.js:90:3 › Bill Pay › TC-BILL-UI-004: missing amount field shows validation error @regression @ui 
+
+    Error: browser.newContext: storageState.cookies[0]: expected object, got null
+
+       at ../../fixtures/ui.fixtures.js:73
+
+      71 |       await apiRequest.dispose();
+      72 |
+    > 73 |       const context = await browser.newContext({
+         |                       ^
+      74 |         storageState: {
+      75 |           cookies: [cookie],
+      76 |           origins: [],
+        at Object.base.extend.authenticatedContext.scope (/Users/jsernav/Documents/repositories/claude-code-1/fixtures/ui.fixtures.js:73:23)
+
+    Error Context: ../../test-results/bill-pay-bill-pay-Bill-Pay-47cd7-idation-error-regression-ui-chromium/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../test-results/bill-pay-bill-pay-Bill-Pay-47cd7-idation-error-regression-ui-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../test-results/bill-pay-bill-pay-Bill-Pay-47cd7-idation-error-regression-ui-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+]]>
+</error>
+</testcase>
+</testsuite>
+<testsuite name="find-transactions/find-transactions.spec.js" timestamp="2026-04-09T12:02:42.122Z" hostname="chromium" tests="4" failures="0" skipped="0" time="0.002" errors="4">
+<testcase name="Find Transactions › TC-FIND-UI-001: search by amount returns matching transactions @smoke @ui" classname="find-transactions/find-transactions.spec.js" time="0.001">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|../test-results/find-transactions-find-tra-aa53a-ching-transactions-smoke-ui-chromium/error-context.md]]
+
+[[ATTACHMENT|../test-results/find-transactions-find-tra-aa53a-ching-transactions-smoke-ui-chromium/trace.zip]]
+]]>
+</system-out>
+<error message="browser.newContext: storageState.cookies[0]: expected object, got null" type="Error">
+<![CDATA[  [chromium] › find-transactions/find-transactions.spec.js:24:3 › Find Transactions › TC-FIND-UI-001: search by amount returns matching transactions @smoke @ui 
+
+    Error: browser.newContext: storageState.cookies[0]: expected object, got null
+
+       at ../../fixtures/ui.fixtures.js:73
+
+      71 |       await apiRequest.dispose();
+      72 |
+    > 73 |       const context = await browser.newContext({
+         |                       ^
+      74 |         storageState: {
+      75 |           cookies: [cookie],
+      76 |           origins: [],
+        at Object.base.extend.authenticatedContext.scope (/Users/jsernav/Documents/repositories/claude-code-1/fixtures/ui.fixtures.js:73:23)
+
+    Error Context: ../../test-results/find-transactions-find-tra-aa53a-ching-transactions-smoke-ui-chromium/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../test-results/find-transactions-find-tra-aa53a-ching-transactions-smoke-ui-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../test-results/find-transactions-find-tra-aa53a-ching-transactions-smoke-ui-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+]]>
+</error>
+</testcase>
+<testcase name="Find Transactions › TC-FIND-UI-002: search by date range returns transactions within range @regression @ui" classname="find-transactions/find-transactions.spec.js" time="0">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|../test-results/find-transactions-find-tra-cd72a--within-range-regression-ui-chromium/error-context.md]]
+
+[[ATTACHMENT|../test-results/find-transactions-find-tra-cd72a--within-range-regression-ui-chromium/trace.zip]]
+]]>
+</system-out>
+<error message="browser.newContext: storageState.cookies[0]: expected object, got null" type="Error">
+<![CDATA[  [chromium] › find-transactions/find-transactions.spec.js:49:3 › Find Transactions › TC-FIND-UI-002: search by date range returns transactions within range @regression @ui 
+
+    Error: browser.newContext: storageState.cookies[0]: expected object, got null
+
+       at ../../fixtures/ui.fixtures.js:73
+
+      71 |       await apiRequest.dispose();
+      72 |
+    > 73 |       const context = await browser.newContext({
+         |                       ^
+      74 |         storageState: {
+      75 |           cookies: [cookie],
+      76 |           origins: [],
+        at Object.base.extend.authenticatedContext.scope (/Users/jsernav/Documents/repositories/claude-code-1/fixtures/ui.fixtures.js:73:23)
+
+    Error Context: ../../test-results/find-transactions-find-tra-cd72a--within-range-regression-ui-chromium/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../test-results/find-transactions-find-tra-cd72a--within-range-regression-ui-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../test-results/find-transactions-find-tra-cd72a--within-range-regression-ui-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+]]>
+</error>
+</testcase>
+<testcase name="Find Transactions › TC-FIND-UI-003: search with no matching results shows empty state @regression @ui" classname="find-transactions/find-transactions.spec.js" time="0">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|../test-results/find-transactions-find-tra-954e0-s-empty-state-regression-ui-chromium/error-context.md]]
+
+[[ATTACHMENT|../test-results/find-transactions-find-tra-954e0-s-empty-state-regression-ui-chromium/trace.zip]]
+]]>
+</system-out>
+<error message="browser.newContext: storageState.cookies[0]: expected object, got null" type="Error">
+<![CDATA[  [chromium] › find-transactions/find-transactions.spec.js:63:3 › Find Transactions › TC-FIND-UI-003: search with no matching results shows empty state @regression @ui 
+
+    Error: browser.newContext: storageState.cookies[0]: expected object, got null
+
+       at ../../fixtures/ui.fixtures.js:73
+
+      71 |       await apiRequest.dispose();
+      72 |
+    > 73 |       const context = await browser.newContext({
+         |                       ^
+      74 |         storageState: {
+      75 |           cookies: [cookie],
+      76 |           origins: [],
+        at Object.base.extend.authenticatedContext.scope (/Users/jsernav/Documents/repositories/claude-code-1/fixtures/ui.fixtures.js:73:23)
+
+    Error Context: ../../test-results/find-transactions-find-tra-954e0-s-empty-state-regression-ui-chromium/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../test-results/find-transactions-find-tra-954e0-s-empty-state-regression-ui-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../test-results/find-transactions-find-tra-954e0-s-empty-state-regression-ui-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+]]>
+</error>
+</testcase>
+<testcase name="Find Transactions › TC-FIND-UI-004: search by transaction ID returns that specific transaction @regression @ui" classname="find-transactions/find-transactions.spec.js" time="0.001">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|../test-results/find-transactions-find-tra-5e8a5-c-transaction-regression-ui-chromium/error-context.md]]
+
+[[ATTACHMENT|../test-results/find-transactions-find-tra-5e8a5-c-transaction-regression-ui-chromium/trace.zip]]
+]]>
+</system-out>
+<error message="browser.newContext: storageState.cookies[0]: expected object, got null" type="Error">
+<![CDATA[  [chromium] › find-transactions/find-transactions.spec.js:76:3 › Find Transactions › TC-FIND-UI-004: search by transaction ID returns that specific transaction @regression @ui 
+
+    Error: browser.newContext: storageState.cookies[0]: expected object, got null
+
+       at ../../fixtures/ui.fixtures.js:73
+
+      71 |       await apiRequest.dispose();
+      72 |
+    > 73 |       const context = await browser.newContext({
+         |                       ^
+      74 |         storageState: {
+      75 |           cookies: [cookie],
+      76 |           origins: [],
+        at Object.base.extend.authenticatedContext.scope (/Users/jsernav/Documents/repositories/claude-code-1/fixtures/ui.fixtures.js:73:23)
+
+    Error Context: ../../test-results/find-transactions-find-tra-5e8a5-c-transaction-regression-ui-chromium/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../test-results/find-transactions-find-tra-5e8a5-c-transaction-regression-ui-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../test-results/find-transactions-find-tra-5e8a5-c-transaction-regression-ui-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+]]>
+</error>
+</testcase>
+</testsuite>
+<testsuite name="loans/request-loan.spec.js" timestamp="2026-04-09T12:02:42.122Z" hostname="chromium" tests="4" failures="0" skipped="0" time="0.004" errors="4">
+<testcase name="Request Loan › TC-LOAN-UI-001: loan with sufficient down payment results in approval @smoke @ui" classname="loans/request-loan.spec.js" time="0.001">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|../test-results/loans-request-loan-Request-988af-esults-in-approval-smoke-ui-chromium/error-context.md]]
+
+[[ATTACHMENT|../test-results/loans-request-loan-Request-988af-esults-in-approval-smoke-ui-chromium/trace.zip]]
+]]>
+</system-out>
+<error message="browser.newContext: storageState.cookies[0]: expected object, got null" type="Error">
+<![CDATA[  [chromium] › loans/request-loan.spec.js:21:3 › Request Loan › TC-LOAN-UI-001: loan with sufficient down payment results in approval @smoke @ui 
+
+    Error: browser.newContext: storageState.cookies[0]: expected object, got null
+
+       at ../../fixtures/ui.fixtures.js:73
+
+      71 |       await apiRequest.dispose();
+      72 |
+    > 73 |       const context = await browser.newContext({
+         |                       ^
+      74 |         storageState: {
+      75 |           cookies: [cookie],
+      76 |           origins: [],
+        at Object.base.extend.authenticatedContext.scope (/Users/jsernav/Documents/repositories/claude-code-1/fixtures/ui.fixtures.js:73:23)
+
+    Error Context: ../../test-results/loans-request-loan-Request-988af-esults-in-approval-smoke-ui-chromium/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../test-results/loans-request-loan-Request-988af-esults-in-approval-smoke-ui-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../test-results/loans-request-loan-Request-988af-esults-in-approval-smoke-ui-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+]]>
+</error>
+</testcase>
+<testcase name="Request Loan › TC-LOAN-UI-002: loan with zero down payment results in denial @regression @ui" classname="loans/request-loan.spec.js" time="0.001">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|../test-results/loans-request-loan-Request-50107-lts-in-denial-regression-ui-chromium/error-context.md]]
+
+[[ATTACHMENT|../test-results/loans-request-loan-Request-50107-lts-in-denial-regression-ui-chromium/trace.zip]]
+]]>
+</system-out>
+<error message="browser.newContext: storageState.cookies[0]: expected object, got null" type="Error">
+<![CDATA[  [chromium] › loans/request-loan.spec.js:34:3 › Request Loan › TC-LOAN-UI-002: loan with zero down payment results in denial @regression @ui 
+
+    Error: browser.newContext: storageState.cookies[0]: expected object, got null
+
+       at ../../fixtures/ui.fixtures.js:73
+
+      71 |       await apiRequest.dispose();
+      72 |
+    > 73 |       const context = await browser.newContext({
+         |                       ^
+      74 |         storageState: {
+      75 |           cookies: [cookie],
+      76 |           origins: [],
+        at Object.base.extend.authenticatedContext.scope (/Users/jsernav/Documents/repositories/claude-code-1/fixtures/ui.fixtures.js:73:23)
+
+    Error Context: ../../test-results/loans-request-loan-Request-50107-lts-in-denial-regression-ui-chromium/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../test-results/loans-request-loan-Request-50107-lts-in-denial-regression-ui-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../test-results/loans-request-loan-Request-50107-lts-in-denial-regression-ui-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+]]>
+</error>
+</testcase>
+<testcase name="Request Loan › TC-LOAN-UI-003: missing loan amount shows validation error @regression @ui" classname="loans/request-loan.spec.js" time="0.001">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|../test-results/loans-request-loan-Request-658b4-idation-error-regression-ui-chromium/error-context.md]]
+
+[[ATTACHMENT|../test-results/loans-request-loan-Request-658b4-idation-error-regression-ui-chromium/trace.zip]]
+]]>
+</system-out>
+<error message="browser.newContext: storageState.cookies[0]: expected object, got null" type="Error">
+<![CDATA[  [chromium] › loans/request-loan.spec.js:47:3 › Request Loan › TC-LOAN-UI-003: missing loan amount shows validation error @regression @ui 
+
+    Error: browser.newContext: storageState.cookies[0]: expected object, got null
+
+       at ../../fixtures/ui.fixtures.js:73
+
+      71 |       await apiRequest.dispose();
+      72 |
+    > 73 |       const context = await browser.newContext({
+         |                       ^
+      74 |         storageState: {
+      75 |           cookies: [cookie],
+      76 |           origins: [],
+        at Object.base.extend.authenticatedContext.scope (/Users/jsernav/Documents/repositories/claude-code-1/fixtures/ui.fixtures.js:73:23)
+
+    Error Context: ../../test-results/loans-request-loan-Request-658b4-idation-error-regression-ui-chromium/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../test-results/loans-request-loan-Request-658b4-idation-error-regression-ui-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../test-results/loans-request-loan-Request-658b4-idation-error-regression-ui-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+]]>
+</error>
+</testcase>
+<testcase name="Request Loan › TC-LOAN-UI-004: approved loan account appears in accounts overview @regression @ui" classname="loans/request-loan.spec.js" time="0.001">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|../test-results/loans-request-loan-Request-976bb-unts-overview-regression-ui-chromium/error-context.md]]
+
+[[ATTACHMENT|../test-results/loans-request-loan-Request-976bb-unts-overview-regression-ui-chromium/trace.zip]]
+]]>
+</system-out>
+<error message="browser.newContext: storageState.cookies[0]: expected object, got null" type="Error">
+<![CDATA[  [chromium] › loans/request-loan.spec.js:59:3 › Request Loan › TC-LOAN-UI-004: approved loan account appears in accounts overview @regression @ui 
+
+    Error: browser.newContext: storageState.cookies[0]: expected object, got null
+
+       at ../../fixtures/ui.fixtures.js:73
+
+      71 |       await apiRequest.dispose();
+      72 |
+    > 73 |       const context = await browser.newContext({
+         |                       ^
+      74 |         storageState: {
+      75 |           cookies: [cookie],
+      76 |           origins: [],
+        at Object.base.extend.authenticatedContext.scope (/Users/jsernav/Documents/repositories/claude-code-1/fixtures/ui.fixtures.js:73:23)
+
+    Error Context: ../../test-results/loans-request-loan-Request-976bb-unts-overview-regression-ui-chromium/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../test-results/loans-request-loan-Request-976bb-unts-overview-regression-ui-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../test-results/loans-request-loan-Request-976bb-unts-overview-regression-ui-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+]]>
+</error>
+</testcase>
+</testsuite>
+<testsuite name="transfers/transfer-funds.spec.js" timestamp="2026-04-09T12:02:42.122Z" hostname="chromium" tests="5" failures="0" skipped="0" time="0.003" errors="5">
+<testcase name="Transfer Funds › TC-XFER-UI-001: successful transfer shows confirmation with amount and account refs @smoke @ui" classname="transfers/transfer-funds.spec.js" time="0.001">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|../test-results/transfers-transfer-funds-T-bf920-t-and-account-refs-smoke-ui-chromium/error-context.md]]
+
+[[ATTACHMENT|../test-results/transfers-transfer-funds-T-bf920-t-and-account-refs-smoke-ui-chromium/trace.zip]]
+]]>
+</system-out>
+<error message="browser.newContext: storageState.cookies[0]: expected object, got null" type="Error">
+<![CDATA[  [chromium] › transfers/transfer-funds.spec.js:15:3 › Transfer Funds › TC-XFER-UI-001: successful transfer shows confirmation with amount and account refs @smoke @ui 
+
+    Error: browser.newContext: storageState.cookies[0]: expected object, got null
+
+       at ../../fixtures/ui.fixtures.js:73
+
+      71 |       await apiRequest.dispose();
+      72 |
+    > 73 |       const context = await browser.newContext({
+         |                       ^
+      74 |         storageState: {
+      75 |           cookies: [cookie],
+      76 |           origins: [],
+        at Object.base.extend.authenticatedContext.scope (/Users/jsernav/Documents/repositories/claude-code-1/fixtures/ui.fixtures.js:73:23)
+
+    Error Context: ../../test-results/transfers-transfer-funds-T-bf920-t-and-account-refs-smoke-ui-chromium/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../test-results/transfers-transfer-funds-T-bf920-t-and-account-refs-smoke-ui-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../test-results/transfers-transfer-funds-T-bf920-t-and-account-refs-smoke-ui-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+]]>
+</error>
+</testcase>
+<testcase name="Transfer Funds › TC-XFER-UI-002: empty amount field shows validation error @regression @ui" classname="transfers/transfer-funds.spec.js" time="0">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|../test-results/transfers-transfer-funds-T-7b514-idation-error-regression-ui-chromium/error-context.md]]
+
+[[ATTACHMENT|../test-results/transfers-transfer-funds-T-7b514-idation-error-regression-ui-chromium/trace.zip]]
+]]>
+</system-out>
+<error message="browser.newContext: storageState.cookies[0]: expected object, got null" type="Error">
+<![CDATA[  [chromium] › transfers/transfer-funds.spec.js:36:3 › Transfer Funds › TC-XFER-UI-002: empty amount field shows validation error @regression @ui 
+
+    Error: browser.newContext: storageState.cookies[0]: expected object, got null
+
+       at ../../fixtures/ui.fixtures.js:73
+
+      71 |       await apiRequest.dispose();
+      72 |
+    > 73 |       const context = await browser.newContext({
+         |                       ^
+      74 |         storageState: {
+      75 |           cookies: [cookie],
+      76 |           origins: [],
+        at Object.base.extend.authenticatedContext.scope (/Users/jsernav/Documents/repositories/claude-code-1/fixtures/ui.fixtures.js:73:23)
+
+    Error Context: ../../test-results/transfers-transfer-funds-T-7b514-idation-error-regression-ui-chromium/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../test-results/transfers-transfer-funds-T-7b514-idation-error-regression-ui-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../test-results/transfers-transfer-funds-T-7b514-idation-error-regression-ui-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+]]>
+</error>
+</testcase>
+<testcase name="Transfer Funds › TC-XFER-UI-003: non-numeric amount shows validation error @regression @ui" classname="transfers/transfer-funds.spec.js" time="0.001">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|../test-results/transfers-transfer-funds-T-9e3a5-idation-error-regression-ui-chromium/error-context.md]]
+
+[[ATTACHMENT|../test-results/transfers-transfer-funds-T-9e3a5-idation-error-regression-ui-chromium/trace.zip]]
+]]>
+</system-out>
+<error message="browser.newContext: storageState.cookies[0]: expected object, got null" type="Error">
+<![CDATA[  [chromium] › transfers/transfer-funds.spec.js:48:3 › Transfer Funds › TC-XFER-UI-003: non-numeric amount shows validation error @regression @ui 
+
+    Error: browser.newContext: storageState.cookies[0]: expected object, got null
+
+       at ../../fixtures/ui.fixtures.js:73
+
+      71 |       await apiRequest.dispose();
+      72 |
+    > 73 |       const context = await browser.newContext({
+         |                       ^
+      74 |         storageState: {
+      75 |           cookies: [cookie],
+      76 |           origins: [],
+        at Object.base.extend.authenticatedContext.scope (/Users/jsernav/Documents/repositories/claude-code-1/fixtures/ui.fixtures.js:73:23)
+
+    Error Context: ../../test-results/transfers-transfer-funds-T-9e3a5-idation-error-regression-ui-chromium/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../test-results/transfers-transfer-funds-T-9e3a5-idation-error-regression-ui-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../test-results/transfers-transfer-funds-T-9e3a5-idation-error-regression-ui-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+]]>
+</error>
+</testcase>
+<testcase name="Transfer Funds › TC-XFER-UI-004: both account dropdowns are populated @smoke @ui" classname="transfers/transfer-funds.spec.js" time="0">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|../test-results/transfers-transfer-funds-T-041ee-owns-are-populated-smoke-ui-chromium/error-context.md]]
+
+[[ATTACHMENT|../test-results/transfers-transfer-funds-T-041ee-owns-are-populated-smoke-ui-chromium/trace.zip]]
+]]>
+</system-out>
+<error message="browser.newContext: storageState.cookies[0]: expected object, got null" type="Error">
+<![CDATA[  [chromium] › transfers/transfer-funds.spec.js:58:3 › Transfer Funds › TC-XFER-UI-004: both account dropdowns are populated @smoke @ui 
+
+    Error: browser.newContext: storageState.cookies[0]: expected object, got null
+
+       at ../../fixtures/ui.fixtures.js:73
+
+      71 |       await apiRequest.dispose();
+      72 |
+    > 73 |       const context = await browser.newContext({
+         |                       ^
+      74 |         storageState: {
+      75 |           cookies: [cookie],
+      76 |           origins: [],
+        at Object.base.extend.authenticatedContext.scope (/Users/jsernav/Documents/repositories/claude-code-1/fixtures/ui.fixtures.js:73:23)
+
+    Error Context: ../../test-results/transfers-transfer-funds-T-041ee-owns-are-populated-smoke-ui-chromium/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../test-results/transfers-transfer-funds-T-041ee-owns-are-populated-smoke-ui-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../test-results/transfers-transfer-funds-T-041ee-owns-are-populated-smoke-ui-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+]]>
+</error>
+</testcase>
+<testcase name="Transfer Funds › TC-XFER-UI-005: zero amount shows validation error @regression @ui" classname="transfers/transfer-funds.spec.js" time="0.001">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|../test-results/transfers-transfer-funds-T-8fb0c-idation-error-regression-ui-chromium/error-context.md]]
+
+[[ATTACHMENT|../test-results/transfers-transfer-funds-T-8fb0c-idation-error-regression-ui-chromium/trace.zip]]
+]]>
+</system-out>
+<error message="browser.newContext: storageState.cookies[0]: expected object, got null" type="Error">
+<![CDATA[  [chromium] › transfers/transfer-funds.spec.js:77:3 › Transfer Funds › TC-XFER-UI-005: zero amount shows validation error @regression @ui 
+
+    Error: browser.newContext: storageState.cookies[0]: expected object, got null
+
+       at ../../fixtures/ui.fixtures.js:73
+
+      71 |       await apiRequest.dispose();
+      72 |
+    > 73 |       const context = await browser.newContext({
+         |                       ^
+      74 |         storageState: {
+      75 |           cookies: [cookie],
+      76 |           origins: [],
+        at Object.base.extend.authenticatedContext.scope (/Users/jsernav/Documents/repositories/claude-code-1/fixtures/ui.fixtures.js:73:23)
+
+    Error Context: ../../test-results/transfers-transfer-funds-T-8fb0c-idation-error-regression-ui-chromium/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../test-results/transfers-transfer-funds-T-8fb0c-idation-error-regression-ui-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../test-results/transfers-transfer-funds-T-8fb0c-idation-error-regression-ui-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+]]>
+</error>
+</testcase>
+</testsuite>
+</testsuites>

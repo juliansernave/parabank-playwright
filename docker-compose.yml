@@ -1,0 +1,16 @@
+services:
+  parabank:
+    image: parasoft/parabank
+    container_name: parabank
+    ports:
+      # ParaBank listens on 8080 inside the container; expose it on the same port locally
+      - "8080:8080"
+    restart: unless-stopped
+    healthcheck:
+      # Poll the ParaBank index page — a 200 means the app is fully up and accepting requests.
+      # interval/timeout/retries are tuned for the ~30–60 s cold-start time of the embedded Tomcat.
+      test: ["CMD", "curl", "-f", "http://localhost:8080/parabank/index.htm"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+      start_period: 20s

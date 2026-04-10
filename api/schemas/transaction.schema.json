@@ -1,0 +1,36 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "transaction.schema.json",
+  "title": "ParaBank Transaction",
+  "description": "Schema for a single transaction object returned by /accounts/:id/transactions",
+  "type": "object",
+  "required": ["id", "date", "amount", "type"],
+  "properties": {
+    "id": {
+      "type": "integer",
+      "description": "Unique transaction ID"
+    },
+    "accountId": {
+      "type": "integer",
+      "description": "Account the transaction belongs to"
+    },
+    "date": {
+      "type": "integer",
+      "description": "Transaction timestamp as Unix epoch milliseconds"
+    },
+    "amount": {
+      "type": "number",
+      "description": "Transaction amount — positive for credits, negative for debits"
+    },
+    "type": {
+      "type": "string",
+      "description": "Transaction type",
+      "enum": ["Credit", "Debit"]
+    },
+    "description": {
+      "type": "string",
+      "description": "Human-readable transaction description"
+    }
+  },
+  "additionalProperties": true
+}

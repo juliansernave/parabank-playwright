@@ -1,0 +1,50 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "customer.schema.json",
+  "title": "ParaBank Customer",
+  "description": "Schema for the customer object returned by GET /customers/:id",
+  "type": "object",
+  "required": ["id", "firstName", "lastName", "address"],
+  "properties": {
+    "id": {
+      "type": "integer",
+      "description": "Unique customer ID"
+    },
+    "firstName": {
+      "type": "string",
+      "description": "Customer first name"
+    },
+    "lastName": {
+      "type": "string",
+      "description": "Customer last name"
+    },
+    "address": {
+      "type": "object",
+      "required": ["street", "city", "state", "zipCode"],
+      "properties": {
+        "street": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string"
+        },
+        "zipCode": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": true
+    },
+    "phoneNumber": {
+      "type": "string",
+      "description": "Customer phone number"
+    },
+    "ssn": {
+      "type": "string",
+      "description": "Customer SSN (masked in most environments)"
+    }
+  },
+  "additionalProperties": true
+}

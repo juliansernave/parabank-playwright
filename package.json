@@ -1,0 +1,26 @@
+{
+  "name": "parabank-playwright",
+  "version": "1.0.0",
+  "description": "Playwright + JavaScript test automation framework for ParaBank",
+  "type": "module",
+  "scripts": {
+    "test:ui": "playwright test --config=playwright.config.js",
+    "test:ui:headed": "playwright test --config=playwright.config.js --headed",
+    "test:api": "playwright test --config=playwright.api.config.js",
+    "test:smoke": "playwright test --grep @smoke",
+    "test:regression": "playwright test --grep @regression",
+    "report": "allure generate allure-results --clean -o allure-report && allure open allure-report",
+    "report:generate": "allure generate allure-results --clean -o allure-report",
+    "docker:up": "docker compose up -d --wait",
+    "docker:down": "docker compose down",
+    "docker:logs": "docker compose logs -f parabank",
+    "test:local": "TEST_ENV=local playwright test --config=playwright.config.js",
+    "test:local:api": "TEST_ENV=local playwright test --config=playwright.api.config.js"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.43.0",
+    "ajv": "^8.12.0",
+    "allure-playwright": "^3.0.0",
+    "dotenv": "^16.4.5"
+  }
+}

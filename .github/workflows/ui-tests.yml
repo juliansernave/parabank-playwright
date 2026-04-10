@@ -1,0 +1,148 @@
+name: UI Tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+# Cancel any in-progress run for the same branch/PR to avoid queuing redundant jobs
+concurrency:
+  group: ui-tests-${{ github.head_ref || github.sha }}
+  cancel-in-progress: true
+
+jobs:
+  ui-tests:
+    name: UI Tests (shard ${{ matrix.shard }}/3)
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    # ParaBank service is available in CI if tests ever need to target a local container.
+    # The default TEST_ENV remains `staging` — this service block is additive, not a default switch.
+    # --health-retries 12 at 10 s intervals gives ~2 minutes for Tomcat's cold start.
+    services:
+      parabank:
+        image: parasoft/parabank
+        ports:
+          - 8080:8080
+        options: >-
+          --health-cmd "curl -f http://localhost:8080/parabank/index.htm || exit 1"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 12
+
+    strategy:
+      # fail-fast: false so all shards complete and we collect the full failure picture
+      fail-fast: false
+      matrix:
+        shard: [1, 2, 3]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          # Pinned to 20 — matches the runtime version used in local dev
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      # Cache Playwright browser binaries keyed on lockfile hash.
+      # On a cache hit we skip the full browser download (~300 MB) and only
+      # run install-deps to apply any OS-level library requirements.
+      - name: Cache Playwright browsers
+        uses: actions/cache@v4
+        id: playwright-cache
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
+
+      - name: Install Playwright browsers (cache miss)
+        if: steps.playwright-cache.outputs.cache-hit != 'true'
+        run: npx playwright install --with-deps chromium
+
+      - name: Install Playwright system dependencies (cache hit)
+        if: steps.playwright-cache.outputs.cache-hit == 'true'
+        run: npx playwright install-deps chromium
+
+      - name: Run UI tests (shard ${{ matrix.shard }}/3)
+        # CI env var drives forbidOnly and retries in playwright.config.js
+        run: npm run test:ui -- --shard=${{ matrix.shard }}/3
+        env:
+          CI: true
+          TEST_ENV: staging
+
+      # Upload this shard's Allure results using a unique artifact name.
+      # The publish-report job downloads all three and merges them.
+      - name: Upload Allure results (shard ${{ matrix.shard }})
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: allure-results-${{ matrix.shard }}
+          path: allure-results/
+          retention-days: 30
+
+      - name: Upload Playwright report (shard ${{ matrix.shard }})
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: playwright-report-ui-${{ matrix.shard }}
+          path: playwright-report/
+          retention-days: 7
+
+  publish-report:
+    name: Publish Allure Report to GitHub Pages
+    needs: [ui-tests]
+    # Run even if tests fail — we always want the report available for triage
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    # Write permission is required for peaceiris/actions-gh-pages to push to gh-pages branch
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Download all three UI shard artifacts AND the API results artifact into
+      # a single directory. merge-multiple: true flattens them so allure generate
+      # sees one flat results/ folder rather than nested artifact subdirectories.
+      - name: Download all Allure results
+        uses: actions/download-artifact@v4
+        with:
+          pattern: allure-results-*
+          merge-multiple: true
+          path: allure-results/
+
+      # Install the Allure CLI globally — npx allure-commandline is not reliable
+      # across all npm registry mirrors and requires an extra resolution step.
+      - name: Install Allure CLI
+        run: npm install -g allure-commandline
+
+      - name: Generate Allure report
+        run: allure generate allure-results --clean -o allure-report
+
+      # Upload the generated report as an artifact for direct download
+      - name: Upload Allure report artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-report
+          path: allure-report/
+          retention-days: 30
+
+      # Publish the report to GitHub Pages.
+      # The report will be accessible at https://<owner>.github.io/<repo>/
+      # Requires GitHub Pages to be configured to serve from the gh-pages branch.
+      - name: Publish to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./allure-report
+          # Overwrite previous report on each run — keeps Pages serving the latest results
+          force_orphan: true

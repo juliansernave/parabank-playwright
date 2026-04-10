@@ -1,0 +1,28 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "account.schema.json",
+  "title": "ParaBank Account",
+  "description": "Schema for a single account object returned by /accounts/:id and /customers/:id/accounts",
+  "type": "object",
+  "required": ["id", "customerId", "type", "balance"],
+  "properties": {
+    "id": {
+      "type": "integer",
+      "description": "Unique account ID"
+    },
+    "customerId": {
+      "type": "integer",
+      "description": "ID of the customer who owns the account"
+    },
+    "type": {
+      "type": "string",
+      "description": "Account type",
+      "enum": ["CHECKING", "SAVINGS", "LOAN", "CREDIT_CARD", "MONEY_MARKET", "LINE_OF_CREDIT", "IRA", "MUTUAL_FUND"]
+    },
+    "balance": {
+      "type": "number",
+      "description": "Current balance in USD"
+    }
+  },
+  "additionalProperties": true
+}

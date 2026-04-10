@@ -1,0 +1,31 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "loan.schema.json",
+  "title": "ParaBank Loan Application Response",
+  "description": "Schema for the response from POST /requestLoan. Observed shape: responseDate is epoch ms (integer), loanAmount/downPayment are NOT returned in the response body.",
+  "type": "object",
+  "required": ["loanProviderName", "approved", "responseDate"],
+  "properties": {
+    "loanProviderName": {
+      "type": "string",
+      "description": "Name of the loan provider"
+    },
+    "approved": {
+      "type": "boolean",
+      "description": "Whether the loan was approved"
+    },
+    "accountId": {
+      "type": ["integer", "null"],
+      "description": "New loan account ID when approved; null when denied"
+    },
+    "message": {
+      "type": "string",
+      "description": "Human-readable result message from the loan provider"
+    },
+    "responseDate": {
+      "type": "integer",
+      "description": "Epoch milliseconds timestamp of the loan decision"
+    }
+  },
+  "additionalProperties": true
+}

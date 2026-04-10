@@ -84,7 +84,9 @@ test.describe('Bill Pay', () => {
       fromAccountId: accountIds[0],
     });
 
-    await expect(billPayPage.errors.validationList).toBeVisible();
+    // Mismatch errors render as a field-level span (input_error_verifyAccount),
+    // not in the #validationErrors summary list used for missing required fields.
+    await expect(billPayPage.errors.fieldError('verifyAccount')).toBeVisible();
   });
 
   test('TC-BILL-UI-004: missing amount field shows validation error @regression @ui', async ({

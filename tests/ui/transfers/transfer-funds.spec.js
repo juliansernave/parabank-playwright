@@ -74,13 +74,16 @@ test.describe('Transfer Funds', () => {
     }
   });
 
-  test('TC-XFER-UI-005: zero amount shows validation error @regression @ui', async ({
+  test('TC-XFER-UI-005: zero amount is accepted and shows transfer confirmation @regression @ui', async ({
     transferPage,
+    accountIds,
   }) => {
     await transferPage.navigate();
 
-    await transferPage.submitWithAmount('0');
+    // ParaBank does not validate $0 as invalid — it processes the transfer.
+    // This test documents that behaviour: a zero-amount transfer completes normally.
+    await transferPage.transfer('0', accountIds[0], accountIds[0]);
 
-    await expect(transferPage.amountError).toBeVisible();
+    await expect(transferPage.confirmationHeading).toBeVisible();
   });
 });

@@ -18,6 +18,9 @@ import { ROUTES } from '../../../data/constants.js';
  *   - ParaBank's loan result panel is rendered asynchronously after form submission.
  */
 test.describe('Request Loan', () => {
+  // Loan processing is asynchronous (JMS-backed AJAX) — give each test extra
+  // headroom beyond the default 30 s to handle slow staging responses.
+  test.setTimeout(60_000);
   test('TC-LOAN-UI-001: loan with sufficient down payment results in approval @smoke @ui', async ({
     requestLoanPage,
     accountIds,

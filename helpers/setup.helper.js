@@ -25,5 +25,15 @@ export default async function globalSetup() {
 
   console.log(`[setup] ParaBank DB initialized on ${env} (john/demo seeded)`);
 
+  // Start the JMS listener so the loan service can process applications.
+  // Without this, loan requests queue indefinitely and AJAX results never render.
+  // A non-200 response is logged but not fatal — some deployments auto-start the listener.
+  const jmsResponse = await context.get('/parabank/services/bank/startupJMSListener');
+  if (jmsResponse.status() === 200) {
+    console.log('[setup] JMS listener started');
+  } else {
+    console.warn(`[setup] JMS listener startup returned HTTP ${jmsResponse.status()} — loan tests may be slow`);
+  }
+
   await context.dispose();
 }

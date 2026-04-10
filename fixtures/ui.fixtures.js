@@ -70,12 +70,26 @@ export const uiFixtures = base.extend({
       const { cookie } = await loginViaApi(apiRequest, USERS.JOHN_SMITH);
       await apiRequest.dispose();
 
-      const context = await browser.newContext({
-        storageState: {
-          cookies: [cookie],
-          origins: [],
-        },
-      });
+      let context;
+      if (cookie) {
+        // Fast path: inject the session cookie directly — no browser round-trip needed.
+        context = await browser.newContext({
+          storageState: {
+            cookies: [cookie],
+            origins: [],
+          },
+        });
+      } else {
+        // Fallback: full browser login when the REST login endpoint does not set a
+        // JSESSIONID cookie (e.g. the public staging server and some Docker configs).
+        context = await browser.newContext();
+        const page = await context.newPage();
+        const loginPage = new LoginPage(page);
+        await loginPage.navigate();
+        await loginPage.login(USERS.JOHN_SMITH.username, USERS.JOHN_SMITH.password);
+        await page.waitForURL('**/overview.htm');
+        await page.close();
+      }
 
       await use(context);
       await context.close();

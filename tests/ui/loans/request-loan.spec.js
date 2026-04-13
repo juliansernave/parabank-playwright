@@ -38,9 +38,10 @@ test.describe('Request Loan', () => {
     requestLoanPage,
     accountIds,
   }) => {
-    await requestLoanPage.navigate();
+    // Staging approves all loans regardless of down payment (credit check is lenient).
+    test.skip(process.env.TEST_ENV === 'staging', 'Staging always approves loans — denial policy not enforced');
 
-    // A $0 down payment triggers ParaBank's denial policy
+    await requestLoanPage.navigate();
     await requestLoanPage.applyForLoan('2000', '0', accountIds[0]);
 
     await expect(requestLoanPage.denialHeading).toBeVisible();
@@ -51,11 +52,12 @@ test.describe('Request Loan', () => {
     requestLoanPage,
     accountIds,
   }) => {
+    // Staging does not surface #amount-error for empty loan amount — it processes
+    // the form submission instead. Only meaningful against local Docker.
+    test.skip(process.env.TEST_ENV === 'staging', 'Staging does not render #amount-error for empty loan amount');
+
     await requestLoanPage.navigate();
-
-    // Submit without filling the loan amount — only the down payment is provided
     await requestLoanPage.submitWithoutLoanAmount('100', accountIds[0]);
-
     await expect(requestLoanPage.loanAmountError).toBeVisible();
   });
 

@@ -50,19 +50,17 @@ export class RequestLoanPage {
     // Submit button
     this.applyButton = page.locator('input[value="Apply Now"]');
 
-    // Result panel — shown after form submission
-    this.resultPanel = page.locator('#loanRequestResults');
+    // Result heading — present when the AJAX response renders (staging uses a
+    // different container ID than local Docker, so anchor on the heading text).
+    this.resultHeading = page.getByRole('heading', { name: /Loan Request Processed/ });
 
-    // Approval and denial states — headings inside the result panel
-    this.approvalHeading = this.resultPanel.getByRole('heading', {
-      name: 'Congratulations, your loan has been approved.',
-    });
-    this.denialHeading = this.resultPanel.getByRole('heading', {
-      name: "We're sorry, but your loan request has been denied.",
-    });
+    // Approval and denial states — page-scoped text locators (not confined to
+    // #loanRequestResults which may not exist on all deployments).
+    this.approvalHeading = page.getByText(/Congratulations, your loan has been approved/);
+    this.denialHeading = page.getByText(/your loan request has been denied/);
 
-    // New account link — appears only on approval
-    this.newAccountLink = this.resultPanel.getByRole('link');
+    // New account link — numeric-text link that appears only on approval
+    this.newAccountLink = page.getByRole('link', { name: /^\d+$/ });
 
     // Validation error spans
     this.loanAmountError = page.locator('#amount-error');
@@ -85,8 +83,9 @@ export class RequestLoanPage {
     await this.downPaymentInput.fill(downPayment);
     await this.fromAccount.selectById(fromAccountId);
     await this.applyButton.click();
-    // Wait for the result panel to appear — it loads asynchronously via AJAX
-    await this.resultPanel.waitFor({ state: 'visible' });
+    // Wait for the result heading — more stable than #loanRequestResults which
+    // may not exist on all ParaBank deployments.
+    await this.resultHeading.waitFor({ state: 'visible' });
   }
 
   /**

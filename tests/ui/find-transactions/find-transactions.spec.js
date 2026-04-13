@@ -70,7 +70,9 @@ test.describe('Find Transactions', () => {
     // An extreme amount that will never match any real transaction
     await findTransactionsPage.searchByAmount('9999999');
 
-    await expect(findTransactionsPage.noResultsMessage).toBeVisible();
+    // ParaBank renders an empty results table (0 rows) rather than a visible
+    // error element when a search returns no matches.
+    await expect(findTransactionsPage.resultRows).toHaveCount(0);
   });
 
   test('TC-FIND-UI-004: search by transaction ID returns that specific transaction @regression @ui', async ({

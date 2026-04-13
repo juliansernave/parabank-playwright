@@ -29,19 +29,25 @@ export class AccountOverviewPage {
     // Page heading — present once the authenticated overview loads
     this.heading = page.getByRole('heading', { name: 'Accounts Overview' });
 
-    // The accounts table — all data rows (excludes the header row)
-    this.accountRows = page.locator('table#accountTable tbody tr');
+    // The accounts table — only rows that contain an account link.
+    // The total row lives in <tbody> on staging so a plain tbody tr selector
+    // would include it; filtering by the presence of an <a> tag excludes it.
+    this.accountRows = page.locator('table#accountTable tbody tr').filter({ has: page.locator('td a') });
 
-    // The total balance row — identified by the "Total" label text
-    this.totalRow = page.locator('table#accountTable tfoot tr');
+    // The total balance row — ParaBank renders this in <tbody> (not <tfoot>),
+    // identified by the "Total" text in the first cell.
+    this.totalRow = page.locator('table#accountTable tr').filter({ hasText: /Total/ });
 
-    // Displayed total balance amount cell
-    this.totalBalance = page.locator('table#accountTable tfoot tr td').nth(1);
+    // Displayed total balance amount cell — second <td> of the Total row
+    this.totalBalance = this.totalRow.locator('td').nth(1);
   }
 
   /** Navigate to the accounts overview page. */
   async navigate() {
     await this.page.goto(ROUTES.OVERVIEW);
+    // AngularJS renders the account table asynchronously — wait for at least one
+    // row to be present before returning so callers don't read a stale empty table.
+    await this.accountRows.first().waitFor({ state: 'visible' });
   }
 
   /**
@@ -86,7 +92,9 @@ export class AccountOverviewPage {
    * @returns {Promise<number[]>}
    */
   async getAllBalances() {
-    const balanceCells = this.accountRows.locator('td:nth-child(2)');
+    // Column 3 is "Available Amount" — same column the total row sums.
+    // Column 2 is "Balance" (includes pending), which differs from the displayed total.
+    const balanceCells = this.accountRows.locator('td:nth-child(3)');
     const count = await balanceCells.count();
     const balances = [];
     for (let i = 0; i < count; i++) {

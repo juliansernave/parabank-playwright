@@ -33,6 +33,12 @@ export class ErrorMessage {
 
     // General paragraph error (login failures, server errors)
     this.errorParagraph = page.locator('p.error').first();
+
+    // Any visible error — covers the three patterns ParaBank uses:
+    //   span.error  — field-level inline errors (payee name, zip, etc.)
+    //   p.error     — form-level paragraph errors (account mismatch, empty amount)
+    //   #validationErrors — summary error list rendered on some deployments
+    this.anyError = page.locator('span.error, p.error, #validationErrors').first();
   }
 
   /**

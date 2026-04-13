@@ -43,7 +43,7 @@ cp .env.example .env
 **.env.example:**
 
 ```
-TEST_ENV=staging    # local | staging | production
+TEST_ENV=staging    # local | staging
 ```
 
 Environment-to-URL mapping lives in `config/environments.js`. `TEST_ENV` selects the active entry. `BASE_URL` in that file is the only place URLs are defined — tests never hardcode them.
@@ -54,8 +54,10 @@ Environment-to-URL mapping lives in `config/environments.js`. `TEST_ENV` selects
 
 | Command | What it runs |
 |---|---|
-| `npm run test:ui` | All UI tests (Chromium, headless) |
-| `npm run test:ui:headed` | All UI tests with the browser visible |
+| `npm run test:ui` | All UI tests against staging (Chromium, headless) |
+| `npm run test:ui:headed` | All UI tests against staging with the browser visible |
+| `npm run test:ui:staging` | All UI tests against staging (explicit — same as `test:ui`) |
+| `npm run test:ui:staging:headed` | All UI tests against staging with the browser visible |
 | `npm run test:api` | All API tests (no browser) |
 | `npm run test:smoke` | Tests tagged `@smoke` across both UI and API |
 | `npm run test:regression` | Tests tagged `@regression` across both UI and API |

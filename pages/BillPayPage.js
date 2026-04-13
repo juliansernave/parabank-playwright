@@ -54,16 +54,25 @@ export class BillPayPage {
     // Submit button
     this.sendPaymentButton = page.locator('input[value="Send Payment"]');
 
-    // Success state
-    this.confirmationHeading = page.getByRole('heading', { name: 'Bill Payment Complete!' });
+    // Success state — staging renders "Bill Payment Complete" (no exclamation mark)
+    this.confirmationHeading = page.getByRole('heading', { name: /Bill Payment Complete/ });
 
     // Confirmation detail panel
     this.confirmationPanel = page.locator('#billpayResult');
+
+    // AngularJS cross-field validation messages — these are rendered via ng-show
+    // directives and do NOT carry the span.error class used by field-level errors.
+    // Targeted by visible text since the elements have no stable ID or class.
+    this.accountMismatchError = page.getByText(/account numbers do not match/i);
+    this.amountRequiredError = page.getByText(/amount cannot be empty/i);
   }
 
   /** Navigate to the Bill Pay page. */
   async navigate() {
     await this.page.goto(ROUTES.BILL_PAY);
+    // Wait for the fromAccount dropdown to be populated before returning — AngularJS
+    // loads account options via AJAX and they must exist before form submission.
+    await this.fromAccount.locator.locator('option:not([value=""])').first().waitFor({ state: 'attached' });
   }
 
   /**

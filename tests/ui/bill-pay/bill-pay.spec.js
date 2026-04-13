@@ -66,9 +66,8 @@ test.describe('Bill Pay', () => {
       fromAccountId: accountIds[0],
     });
 
-    // ParaBank renders validation errors inside #validationErrors or as span.error
-    // For payee name, the error appears in the #validationErrors list
-    await expect(billPayPage.errors.validationList).toBeVisible();
+    // Staging renders inline span.error per field rather than a #validationErrors list
+    await expect(billPayPage.errors.anyError).toBeVisible();
   });
 
   test('TC-BILL-UI-003: mismatched account number fields show validation error @regression @ui', async ({
@@ -84,9 +83,7 @@ test.describe('Bill Pay', () => {
       fromAccountId: accountIds[0],
     });
 
-    // Mismatch errors render as a field-level span (input_error_verifyAccount),
-    // not in the #validationErrors summary list used for missing required fields.
-    await expect(billPayPage.errors.fieldError('verifyAccount')).toBeVisible();
+    await expect(billPayPage.accountMismatchError).toBeVisible();
   });
 
   test('TC-BILL-UI-004: missing amount field shows validation error @regression @ui', async ({
@@ -108,6 +105,6 @@ test.describe('Bill Pay', () => {
       fromAccountId: accountIds[0],
     });
 
-    await expect(billPayPage.errors.validationList).toBeVisible();
+    await expect(billPayPage.amountRequiredError).toBeVisible();
   });
 });

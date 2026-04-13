@@ -15,14 +15,13 @@ import { AccountSelector } from './components/AccountSelector.js';
  * once the search completes.
  *
  * Locator rationale:
- *   - Account dropdown: composed via AccountSelector using the element ID.
- *   - Search inputs: targeted by element ID (#criteria.transactionId, etc.)
- *     because ParaBank's form uses numeric IDs and no aria-label attributes.
- *   - Submit buttons: each search section has its own button with a specific
- *     value text (e.g., "Find by Amount") — targeted by input[value="X"].
+ *   - Account dropdown: composed via AccountSelector using element id="accountId".
+ *   - Search inputs: targeted by element ID (#transactionId, #transactionDate, etc.)
+ *     — the form is plain HTML with stable IDs and no AngularJS directives.
+ *   - Submit buttons: each has a unique element ID (#findById, #findByDate, etc.).
  *   - Results table: identified by id="transactionTable".
- *   - No results message: ParaBank renders this as a paragraph inside the result
- *     area — targeted by text content.
+ *   - No results message: identified by id="errorContainer" (ParaBank shows this
+ *     div when no transactions match the search criteria).
  *
  * @example
  * await findTransactionsPage.navigate();
@@ -39,28 +38,35 @@ export class FindTransactionsPage {
     // Account selector — required for all searches
     this.accountSelector = new AccountSelector(page.locator('#accountId'));
 
-    // Search input fields — identified by element IDs
-    this.transactionIdInput = page.locator('#criteria\\.transactionId');
-    this.searchDateInput = page.locator('#criteria\\.onDate');
-    this.fromDateInput = page.locator('#criteria\\.fromDate');
-    this.toDateInput = page.locator('#criteria\\.toDate');
-    this.amountInput = page.locator('#criteria\\.amount');
+    // Submit buttons — each has a stable element ID assigned by ParaBank.
+    // The form is plain HTML (no AngularJS ng-click); buttons are type="submit".
+    this.findByIdButton = page.locator('#findById');
+    this.findByDateButton = page.locator('#findByDate');
+    this.findByDateRangeButton = page.locator('#findByDateRange');
+    this.findByAmountButton = page.locator('#findByAmount');
 
-    // Submit buttons — one per search mode
-    this.findByIdButton = page.locator('button[ng-click="criteria.searchById()"]');
-    this.findByDateButton = page.locator('button[ng-click="criteria.searchByDate()"]');
-    this.findByDateRangeButton = page.locator('button[ng-click="criteria.searchByDateRange()"]');
-    this.findByAmountButton = page.locator('button[ng-click="criteria.searchByAmount()"]');
+    // Search inputs — each has a stable element ID.
+    this.transactionIdInput = page.locator('#transactionId');
+    this.searchDateInput = page.locator('#transactionDate');
+    this.fromDateInput = page.locator('#fromDate');
+    this.toDateInput = page.locator('#toDate');
+    this.amountInput = page.locator('#amount');
 
     // Results
     this.resultsTable = page.locator('#transactionTable');
     this.resultRows = page.locator('#transactionTable tbody tr');
-    this.noResultsMessage = page.locator('#noTransactions');
+    // #errorContainer is present in the DOM but stays hidden for empty amount/date
+    // searches — ParaBank renders the results table with 0 rows in that case.
+    // It may appear for form-validation errors (e.g. invalid input).
+    this.noResultsMessage = page.locator('#errorContainer');
   }
 
   /** Navigate to the Find Transactions page. */
   async navigate() {
     await this.page.goto(ROUTES.FIND_TRANSACTIONS);
+    // Wait for the account dropdown to be populated before returning — AngularJS
+    // loads the options via AJAX and they must exist before selectAccount() is called.
+    await this.accountSelector.locator.locator('option:not([value=""])').first().waitFor({ state: 'attached' });
   }
 
   /**
@@ -73,12 +79,21 @@ export class FindTransactionsPage {
   }
 
   /**
+   * Wait for the search response to render — either a results table or the
+   * "no results" error container becomes visible. Called after every search.
+   */
+  async #waitForSearchResponse() {
+    await this.resultsTable.or(this.noResultsMessage).first().waitFor({ state: 'visible' });
+  }
+
+  /**
    * Search transactions by transaction ID.
    * @param {string|number} transactionId
    */
   async searchByTransactionId(transactionId) {
     await this.transactionIdInput.fill(String(transactionId));
     await this.findByIdButton.click();
+    await this.#waitForSearchResponse();
   }
 
   /**
@@ -88,6 +103,7 @@ export class FindTransactionsPage {
   async searchByDate(date) {
     await this.searchDateInput.fill(date);
     await this.findByDateButton.click();
+    await this.#waitForSearchResponse();
   }
 
   /**
@@ -99,6 +115,7 @@ export class FindTransactionsPage {
     await this.fromDateInput.fill(fromDate);
     await this.toDateInput.fill(toDate);
     await this.findByDateRangeButton.click();
+    await this.#waitForSearchResponse();
   }
 
   /**
@@ -108,6 +125,7 @@ export class FindTransactionsPage {
   async searchByAmount(amount) {
     await this.amountInput.fill(String(amount));
     await this.findByAmountButton.click();
+    await this.#waitForSearchResponse();
   }
 
   /**
@@ -120,16 +138,20 @@ export class FindTransactionsPage {
 
   /**
    * Return all transaction IDs from the result rows.
-   * Each result row links to the transaction detail page; the link text is the ID.
+   * The transaction table columns are: Date | Transaction (linked) | Debit | Credit.
+   * The second column holds an <a> whose href contains the transaction ID as the
+   * `id` query parameter (e.g. `activity.htm?id=14254`). The link text is the
+   * transaction description, not the numeric ID.
    * @returns {Promise<string[]>}
    */
   async getResultTransactionIds() {
-    const links = this.resultRows.locator('td:first-child a');
+    const links = this.resultRows.locator('td:nth-child(2) a');
     const count = await links.count();
     const ids = [];
     for (let i = 0; i < count; i++) {
-      const text = await links.nth(i).textContent();
-      ids.push(text?.trim() ?? '');
+      const href = await links.nth(i).getAttribute('href');
+      const url = new URL(href ?? '', 'http://dummy');
+      ids.push(url.searchParams.get('id') ?? '');
     }
     return ids;
   }

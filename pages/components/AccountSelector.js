@@ -51,6 +51,9 @@ export class AccountSelector {
    * @returns {Promise<string[]>}
    */
   async getAllValues() {
+    // AngularJS populates the <select> options asynchronously — wait for at least
+    // one non-placeholder option to exist before reading the full list.
+    await this.select.locator('option:not([value=""])').first().waitFor({ state: 'attached' });
     return this.select.evaluate((el) =>
       Array.from(el.options).map((opt) => opt.value).filter((v) => v !== '')
     );

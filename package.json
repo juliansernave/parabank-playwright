@@ -15,7 +15,9 @@
     "docker:down": "docker compose down",
     "docker:logs": "docker compose logs -f parabank",
     "test:local": "TEST_ENV=local playwright test --config=playwright.config.js",
-    "test:local:api": "TEST_ENV=local playwright test --config=playwright.api.config.js"
+    "test:local:api": "TEST_ENV=local playwright test --config=playwright.api.config.js",
+    "test:ui:staging": "TEST_ENV=staging playwright test --config=playwright.config.js",
+    "test:ui:staging:headed": "TEST_ENV=staging playwright test --config=playwright.config.js --headed"
   },
   "devDependencies": {
     "@playwright/test": "^1.43.0",
